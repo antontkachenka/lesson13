@@ -1,0 +1,101 @@
+[0;32mInfo: Using configured environment 'prod'[0m
+[0;32mInfo: Retrieving pluginfacts[0m
+[0;32mInfo: Retrieving plugin[0m
+[0;32mInfo: Loading facts[0m
+[0;32mInfo: Caching catalog for puppetnode1.minsk.epam.com[0m
+[0;32mInfo: Applying configuration version '1474562153'[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Package[nginx]/ensure: created[0m
+[mNotice: Nginx is installed.[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Notify[Nginx is installed.]/message: defined 'message' as 'Nginx is installed.'[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Service[nginx]/ensure: ensure changed 'stopped' to 'running'[0m
+[0;32mInfo: /Stage[main]/Main/Node[puppetnode1]/Service[nginx]: Unscheduling refresh on Service[nginx][0m
+[mNotice: Nginx is running.[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Notify[Nginx is running.]/message: defined 'message' as 'Nginx is running.'[0m
+[mNotice: /Stage[main]/Mysql::Server::Config/File[/etc/my.cnf.d]/ensure: created[0m
+[mNotice: /Stage[main]/Mysql::Server::Config/File[mysql-config-file]/content: 
+--- /etc/my.cnf	2016-05-11 07:31:18.000000000 +0100
++++ /tmp/puppet-file20160922-19849-1lj8s7b	2016-09-22 17:36:05.671868452 +0100
+@@ -1,10 +1,63 @@
++### MANAGED BY PUPPET ###
++
++[client]
++port = 3306
++socket = /var/lib/mysql/mysql.sock
++
++[isamchk]
++key_buffer_size = 16M
++
+ [mysqld]
+-datadir=/var/lib/mysql
+-socket=/var/lib/mysql/mysql.sock
+-user=mysql
+-# Disabling symbolic-links is recommended to prevent assorted security risks
+-symbolic-links=0
++basedir = /usr
++bind-address = 127.0.0.1
++datadir = /var/lib/mysql
++expire_logs_days = 10
++key_buffer_size = 16M
++log-error = /var/log/mysqld.log
++max_allowed_packet = 16M
++max_binlog_size = 100M
++max_connections = 151
++pid-file = /var/run/mysqld/mysqld.pid
++port = 3306
++query_cache_limit = 1M
++query_cache_size = 16M
++skip-external-locking
++socket = /var/lib/mysql/mysql.sock
++ssl = false
++ssl-ca = /etc/mysql/cacert.pem
++ssl-cert = /etc/mysql/server-cert.pem
++ssl-key = /etc/mysql/server-key.pem
++thread_cache_size = 8
++thread_stack = 256K
++tmpdir = /tmp
++user = mysql
++
++[mysqld-5.0]
++myisam-recover = BACKUP
++
++[mysqld-5.1]
++myisam-recover = BACKUP
++
++[mysqld-5.5]
++myisam-recover = BACKUP
++
++[mysqld-5.6]
++myisam-recover-options = BACKUP
++
++[mysqld-5.7]
++myisam-recover-options = BACKUP
+ 
+ [mysqld_safe]
+-log-error=/var/log/mysqld.log
+-pid-file=/var/run/mysqld/mysqld.pid
++log-error = /var/log/mysqld.log
++nice = 0
++socket = /var/lib/mysql/mysql.sock
++
++[mysqldump]
++max_allowed_packet = 16M
++quick
++quote-names
++
++
++
++!includedir /etc/my.cnf.d
++
+[0m
+[0;32mInfo: Computing checksum on file /etc/my.cnf[0m
+[0;32mInfo: /Stage[main]/Mysql::Server::Config/File[mysql-config-file]: Filebucketed /etc/my.cnf to puppet with sum 8ace886bbe7e274448bc8bea16d3ead6[0m
+[mNotice: /Stage[main]/Mysql::Server::Config/File[mysql-config-file]/content: content changed '{md5}8ace886bbe7e274448bc8bea16d3ead6' to '{md5}4a56a47b135b41f6840bfc3db07b34ee'[0m
+[mNotice: /Stage[main]/Mysql::Server::Install/Package[mysql-server]/ensure: created[0m
+[mNotice: /Stage[main]/Mysql::Server::Installdb/Mysql_datadir[/var/lib/mysql]/ensure: created[0m
+[mNotice: /Stage[main]/Mysql::Server::Service/Service[mysqld]/ensure: ensure changed 'stopped' to 'running'[0m
+[0;32mInfo: /Stage[main]/Mysql::Server::Service/Service[mysqld]: Unscheduling refresh on Service[mysqld][0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Mysql_database[prod_mdb]/ensure: created[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Mysql_user[prod_user@localhost]/ensure: created[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Mysql_grant[prod_user@localhost/*.*]/privileges: privileges changed ['USAGE'] to 'ALL'[0m
+[mNotice: /Stage[main]/Main/Node[puppetnode1]/Mysql_grant[prod_user@localhost/*.*]/options: options changed ['NONE'] to 'GRANT'[0m
+[mNotice: Applied catalog in 16.98 seconds[0m
